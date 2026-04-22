@@ -318,7 +318,7 @@ export default function Home() {
               <img
                 src="/experience-plate.png"
                 alt="Al-Reem Luxury Dining"
-                className="w-full h-full object-cover transition-transform duration-[2.5s] ease-out hover:scale-[1.08] opacity-90"
+                className="w-full h-full object-contain p-4 transition-transform duration-[2.5s] ease-out hover:scale-[1.08] opacity-90"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0A0806]/80 via-transparent to-transparent" />
             </div>
