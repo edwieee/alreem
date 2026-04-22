@@ -17,7 +17,6 @@ export function ImageSequence({ progress, frameCount }: ImageSequenceProps) {
   // Preload all images
   useEffect(() => {
     const loadedImages: HTMLImageElement[] = [];
-    let loadedCount = 0;
 
     for (let i = 1; i <= frameCount; i++) {
       const img = new Image();
@@ -25,12 +24,22 @@ export function ImageSequence({ progress, frameCount }: ImageSequenceProps) {
       const formattedNum = i.toString().padStart(3, "0");
       img.src = `/mandhiframe/ezgif-frame-${formattedNum}.jpg`;
 
-      img.onload = () => {
-        loadedCount++;
-        if (loadedCount === frameCount) {
+      // Draw immediately when the first frame loads to avoid blank screen
+      if (i === 1) {
+        img.onload = () => {
           setLoaded(true);
-        }
-      };
+        };
+      } else {
+        // Redraw if this specific frame just loaded and it's the one we're currently viewing
+        img.onload = () => {
+          if (Math.round(frameIndex.get()) === i - 1) {
+            // Trigger a dummy state update to force the redraw effect
+            setLoaded(l => !l ? true : l); 
+            // Better yet, just call drawImage directly via requestAnimationFrame
+            requestAnimationFrame(() => drawImage(frameIndex.get(), loadedImages));
+          }
+        };
+      }
 
       loadedImages.push(img);
     }
@@ -40,15 +49,16 @@ export function ImageSequence({ progress, frameCount }: ImageSequenceProps) {
   // Frame calculation based on scroll progress
   const frameIndex = useTransform(progress, [0, 1], [0, frameCount - 1]);
 
-  const drawImage = (index: number) => {
-    if (!canvasRef.current || images.length === 0) return;
+  const drawImage = (index: number, imgList = images) => {
+    if (!canvasRef.current || imgList.length === 0) return;
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const img = images[Math.round(index)];
-    if (!img) return;
+    const img = imgList[Math.round(index)];
+    // Ensure image is actually fully downloaded before trying to draw it
+    if (!img || !img.complete || img.naturalWidth === 0) return;
 
     const wrapper = wrapperRef.current;
     if (!wrapper) return;
