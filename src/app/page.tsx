@@ -1,14 +1,17 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useScroll, motion, useTransform } from "framer-motion";
+import Image from "next/image";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { ImageSequence } from "@/components/image-sequence";
 import { HeroParticles } from "@/components/hero-particles";
 import TestimonialsSection from "@/components/ui/testimonial-v2";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export default function Home() {
+  const isMobile = useIsMobile();
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Track scroll progress within the sequence container
@@ -42,8 +45,42 @@ export default function Home() {
     <main className="min-h-screen bg-[#0A0806]">
       <Navbar />
 
-      {/* Scrollytelling Container (300vh) */}
-      <section ref={containerRef} className="relative h-[300vh]">
+      {/* Mobile Optimized Static Hero */}
+      <section className="md:hidden relative h-[90vh] min-h-[600px] flex flex-col justify-end px-6 pb-20 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/mandhiframe/ezgif-frame-150.jpg"
+            alt="Al-Reem Premium Mandhi"
+            fill
+            quality={65}
+            priority
+            sizes="100vw"
+            className="object-cover opacity-60"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0806] via-[#0A0806]/80 to-transparent" />
+        </div>
+        <div className="relative z-10 flex flex-col gap-4 w-full">
+          <div className="flex items-center gap-3 mb-2">
+            <span className="text-[#D4AF37] text-[10px] uppercase font-bold tracking-widest">
+              The Original Kuzhi Mandhi
+            </span>
+            <div className="w-8 h-[1px] bg-[#D4AF37]/50" />
+          </div>
+          <h1 className="font-serif text-[#F9F6F0] font-semibold text-[44px] leading-[1.1] pb-2 shadow-black/50 drop-shadow-lg">
+            Crafted by <br/><span className="text-[#D4AF37]">Fire.</span>
+          </h1>
+          <p className="text-[#E5E5E5] text-[15px] leading-relaxed opacity-90 font-light mt-2 mb-6">
+            Slow cooked underground.<br/>Served with heritage.
+          </p>
+          <div className="flex flex-col gap-4 w-full">
+            <a href="https://www.swiggy.com/search?query=Alreem+Mandhi" target="_blank" rel="noopener noreferrer" className="w-full text-center py-[18px] rounded-full bg-[#D4AF37] text-[#0A0806] text-[12px] font-bold tracking-[0.2em] uppercase shadow-lg">Order Now</a>
+            <a href="#menu" className="w-full text-center py-[18px] rounded-full border border-white/20 bg-white/5 text-[#F9F6F0] text-[12px] font-medium tracking-[0.2em] uppercase backdrop-blur-sm">Explore Menus</a>
+          </div>
+        </div>
+      </section>
+
+      {/* Scrollytelling Container (Desktop Only, 300vh) */}
+      <section ref={containerRef} className="hidden md:block relative h-[300vh]">
         {/* Sticky Visuals */}
         <div className="sticky top-0 h-screen overflow-hidden">
           <ImageSequence progress={scrollYProgress} frameCount={188} />
@@ -232,9 +269,9 @@ export default function Home() {
       </section>
 
       {/* Signature Dishes */}
-      <section id="menu" className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
-        <h2 className="font-serif text-4xl md:text-5xl text-center text-[#D4AF37] mb-16 drop-shadow-[0_4px_24px_rgba(0,0,0,1)]">Signature Mandhi</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section id="menu" className="py-20 md:py-24 px-4 md:px-12 max-w-7xl mx-auto">
+        <h2 className="font-serif text-3xl md:text-5xl text-center text-[#D4AF37] mb-10 md:mb-16 drop-shadow-[0_4px_24px_rgba(0,0,0,1)]">Signature Mandhi</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {[
             {
               name: "Chicken mandi",
@@ -269,25 +306,29 @@ export default function Home() {
           ].map((item, index) => (
             <motion.div
               key={item.name}
-              initial={{ y: 40, opacity: 0 }}
+              initial={{ y: 20, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="relative h-[400px] md:h-[420px] lg:h-[440px] rounded-[1.5rem] overflow-hidden group cursor-pointer border border-[#D4AF37]/30 transition-all duration-700 shadow-xl hover:border-[#D4AF37]/50 hover:shadow-[0_20px_40px_-10px_rgba(212,175,55,0.15)]"
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: isMobile ? 0.4 : 0.8, delay: isMobile ? 0 : index * 0.1, ease: isMobile ? "linear" : [0.16, 1, 0.3, 1] }}
+              className="relative h-[360px] md:h-[420px] lg:h-[440px] rounded-[1.5rem] overflow-hidden group cursor-pointer border border-[#D4AF37]/20 md:border-[#D4AF37]/30 transition-all duration-700 shadow-none md:shadow-xl md:hover:border-[#D4AF37]/50 md:hover:shadow-[0_20px_40px_-10px_rgba(212,175,55,0.15)]"
             >
-              {/* Image Background with Parallax */}
-              <motion.div
-                className="absolute inset-0 bg-cover bg-center"
-                whileHover={{ scale: 1.08 }}
-                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                style={{ backgroundImage: `url(${item.image})` }}
-              />
+              {/* Image Background seamlessly optimized via next/image */}
+              <div className="absolute inset-0 z-0">
+                <Image
+                  src={item.image}
+                  alt={item.name}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  quality={65}
+                  className="object-cover transition-transform duration-1000 md:group-hover:scale-[1.08]"
+                />
+              </div>
 
               {/* Permanent Bottom Dark Gradient Scrim */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0806] via-[#0A0806]/70 to-transparent opacity-95 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0806] via-[#0A0806]/70 to-transparent opacity-95 pointer-events-none z-0" />
 
               {/* Text Container with slight upward lift on hover */}
-              <div className="absolute inset-x-0 bottom-0 z-10 p-8 flex flex-col justify-end transition-transform duration-700 group-hover:-translate-y-2 pointer-events-none">
+              <div className="absolute inset-x-0 bottom-0 z-10 p-6 md:p-8 flex flex-col justify-end transition-transform duration-700 md:group-hover:-translate-y-2 pointer-events-none">
                 <h3 className="font-sans text-[32px] md:text-[34px] font-medium text-[#D4AF37] mb-3">
                   {item.name}
                 </h3>
@@ -305,26 +346,29 @@ export default function Home() {
       <TestimonialsSection />
 
       {/* Restaurant Experience Redesign */}
-      <section id="experience" className="py-40 px-6 md:px-12 bg-[#0A0806]">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+      <section id="experience" className="py-20 md:py-40 px-4 md:px-12 bg-[#0A0806]">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
           <motion.div
-            initial={{ x: -60, opacity: 0 }}
+            initial={{ x: isMobile ? 0 : -60, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: isMobile ? 0.4 : 1, ease: isMobile ? "linear" : [0.16, 1, 0.3, 1] }}
             className="relative"
           >
-            <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl shadow-black/80 relative bg-[#0A0806]">
-              <img
+            <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-none md:shadow-2xl md:shadow-black/80 relative bg-[#0A0806]">
+              <Image
                 src="/experience-plate.png"
                 alt="Al-Reem Luxury Dining"
-                className="w-full h-full object-contain p-4 transition-transform duration-[2.5s] ease-out hover:scale-[1.08] opacity-90"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                quality={65}
+                className="object-contain p-2 md:p-4 transition-transform duration-[2.5s] ease-out md:hover:scale-[1.08] opacity-90"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0806]/80 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0806]/80 via-transparent to-transparent pointer-events-none" />
             </div>
-            {/* Floating decorative elements */}
-            <div className="absolute -bottom-10 -right-10 w-48 h-48 border border-[#D4AF37]/20 rounded-full blur-2xl animate-pulse" />
-            <div className="absolute -top-10 -left-10 w-32 h-32 bg-[#D4AF37]/5 rounded-full blur-xl" />
+            {/* Floating decorative elements (hidden on mobile for performance) */}
+            <div className="hidden md:block absolute -bottom-10 -right-10 w-48 h-48 border border-[#D4AF37]/20 rounded-full blur-2xl animate-pulse" />
+            <div className="hidden md:block absolute -top-10 -left-10 w-32 h-32 bg-[#D4AF37]/5 rounded-full blur-xl" />
           </motion.div>
 
           <div className="text-left">
@@ -379,19 +423,19 @@ export default function Home() {
       </section>
 
       {/* Final CTA Redesign */}
-      <section id="order" className="py-40 px-6 relative overflow-hidden">
+      <section id="order" className="py-24 md:py-40 px-4 md:px-6 relative overflow-hidden">
         {/* Cinematic background for CTA */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-[#0A0806]/90 z-10" />
-          <img
+          <Image
             src="/order-bg.jpg"
             alt="CTA Background"
-            className="w-full h-full object-cover grayscale opacity-20"
-            onError={(e) => {
-              (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=1974";
-            }}
+            fill
+            sizes="100vw"
+            quality={50}
+            className="object-cover grayscale opacity-20"
           />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.15),transparent_70%)]" />
+          <div className="hidden md:block absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.15),transparent_70%)] z-10 pointer-events-none" />
         </div>
 
         <div className="relative z-10 text-center max-w-4xl mx-auto">
@@ -404,14 +448,14 @@ export default function Home() {
             Taste the Mandhi Everyone <span className="gold-gradient-text">Talks About</span>
           </motion.h2>
 
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-8 mt-16">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-6 md:gap-8 mt-12 md:mt-16 w-full px-4">
             <motion.a
               href="https://www.swiggy.com/search?query=Alreem+Mandhi"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.05 }}
+              whileHover={isMobile ? {} : { scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-12 py-6 bg-gradient-to-r from-[#D4AF37] via-[#F5C518] to-[#D4AF37] text-[#0A0806] font-bold rounded-full text-[13px] tracking-[0.2em] uppercase shadow-[0_20px_60px_-15px_rgba(212,175,55,0.4)]"
+              className="w-full sm:w-auto px-10 md:px-12 py-5 md:py-6 bg-gradient-to-r from-[#D4AF37] via-[#F5C518] to-[#D4AF37] text-[#0A0806] font-bold rounded-full text-[12px] md:text-[13px] tracking-[0.2em] uppercase shadow-none md:shadow-[0_20px_60px_-15px_rgba(212,175,55,0.4)]"
             >
               Order Online Now
             </motion.a>

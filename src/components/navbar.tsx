@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import clsx from "clsx";
 
@@ -15,6 +15,7 @@ const navLinks = [
 export function Navbar() {
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolled(latest > 50);
@@ -54,17 +55,50 @@ export function Navbar() {
         ))}
       </div>
 
-      {/* Premium Button */}
-      <div className="flex items-center">
+      {/* Premium Button & Mobile Toggle */}
+      <div className="flex items-center gap-4">
         <Link
           href="https://www.swiggy.com/search?query=Alreem+Mandhi"
           target="_blank"
           rel="noopener noreferrer"
-          className="relative px-8 py-3.5 rounded-full bg-[#D4AF37] text-[#0A0806] text-[12px] font-sans font-bold tracking-[0.2em] uppercase transition-all duration-500 hover:scale-105"
+          className="relative px-6 md:px-8 py-2 md:py-3.5 rounded-full bg-[#D4AF37] text-[#0A0806] text-[10px] md:text-[12px] font-sans font-bold tracking-[0.2em] uppercase transition-all duration-500 hover:scale-105"
         >
           Order Now
         </Link>
+        <button 
+          className="md:hidden flex flex-col justify-center items-center w-8 h-8 z-[60] text-[#D4AF37]"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle Menu"
+        >
+          <span className={`block w-6 h-[2px] bg-current transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-[6px]' : '-translate-y-1'}`} />
+          <span className={`block w-6 h-[2px] bg-current transition-all duration-300 ${menuOpen ? 'opacity-0' : 'opacity-100'}`} />
+          <span className={`block w-6 h-[2px] bg-current transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-[6px]' : 'translate-y-1'}`} />
+        </button>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="fixed inset-0 top-0 left-0 w-full h-screen bg-[#0A0806] z-40 flex flex-col items-center justify-center pt-24 md:hidden"
+          >
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                className="text-2xl text-[#FDFCF0] font-serif mb-8 hover:text-[#D4AF37] transition-colors"
+              >
+                {link.name}
+              </Link>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }

@@ -153,14 +153,49 @@ export default function TestimonialsSection() {
           </p>
         </div>
 
+        {/* Desktop Marquee Layout */}
         <div
-          className="flex justify-center gap-6 md:gap-8 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)] max-h-[600px] overflow-hidden"
+          className="hidden md:flex justify-center gap-6 md:gap-8 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)] max-h-[600px] overflow-hidden"
           role="region"
           aria-label="Scrolling Testimonials"
         >
           <TestimonialsColumn testimonials={firstColumn} duration={25} />
           <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={35} />
           <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={28} />
+        </div>
+
+        {/* Mobile Horizontal Layout */}
+        <div 
+          className="md:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory mt-8 pb-8 px-4 w-full [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          role="region"
+          aria-label="Testimonials Carousel"
+        >
+          {testimonials.map(({ text, name, role, rating }, i) => (
+            <div key={i} className="min-w-[85vw] snap-center">
+              <div className="p-6 rounded-3xl border border-[#D4AF37]/20 shadow-lg w-full bg-[#2B1B12]/80 backdrop-blur-md h-full flex flex-col justify-between">
+                <blockquote className="m-0 p-0 flex-1 flex flex-col">
+                  <div className="flex gap-1 mb-4">
+                    {[...Array(5)].map((_, j) => (
+                      <span key={j} className={`text-lg ${j < rating ? 'text-[#D4AF37]' : 'text-neutral-600'}`}>★</span>
+                    ))}
+                  </div>
+                  <p className="text-[#FDFCF0]/90 leading-relaxed font-light m-0 text-[15px] flex-1">
+                    &quot;{text}&quot;
+                  </p>
+                  <footer className="mt-6 pt-6 border-t border-[#D4AF37]/10">
+                    <div className="flex flex-col">
+                      <cite className="font-serif font-medium tracking-tight leading-5 text-[#D4AF37] not-italic text-lg">
+                        {name}
+                      </cite>
+                      <span className="text-sm font-light leading-5 tracking-wide text-[#FDFCF0]/60 mt-1">
+                        {role}
+                      </span>
+                    </div>
+                  </footer>
+                </blockquote>
+              </div>
+            </div>
+          ))}
         </div>
       </motion.div>
     </section>
