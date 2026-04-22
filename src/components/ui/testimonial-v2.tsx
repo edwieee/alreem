@@ -125,7 +125,7 @@ export default function TestimonialsSection() {
   return (
     <section
       aria-labelledby="testimonials-heading"
-      className="bg-[#0A0806] py-24 relative overflow-hidden"
+      className="bg-[#0A0806] py-24 relative overflow-hidden border-y border-[#D4AF37]/10"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#2B1B12_0%,transparent_70%)] opacity-30" />
       <motion.div
@@ -165,7 +165,7 @@ export default function TestimonialsSection() {
         </div>
 
         {/* Mobile Horizontal Layout */}
-        <div 
+        <div
           className="md:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory mt-8 pb-8 px-4 w-full [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
           role="region"
           aria-label="Testimonials Carousel"

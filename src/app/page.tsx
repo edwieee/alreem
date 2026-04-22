@@ -67,10 +67,10 @@ export default function Home() {
             <div className="w-8 h-[1px] bg-[#D4AF37]/50" />
           </div>
           <h1 className="font-serif text-[#F9F6F0] font-semibold text-[44px] leading-[1.1] pb-2 shadow-black/50 drop-shadow-lg">
-            Crafted by <br/><span className="text-[#D4AF37]">Fire.</span>
+            Crafted by <br /><span className="text-[#D4AF37]">Fire.</span>
           </h1>
           <p className="text-[#E5E5E5] text-[15px] leading-relaxed opacity-90 font-light mt-2 mb-6">
-            Slow cooked underground.<br/>Served with heritage.
+            Slow cooked underground.<br />Served with heritage.
           </p>
           <div className="flex flex-col gap-4 w-full">
             <a href="https://www.swiggy.com/search?query=Alreem+Mandhi" target="_blank" rel="noopener noreferrer" className="w-full text-center py-[18px] rounded-full bg-[#D4AF37] text-[#0A0806] text-[12px] font-bold tracking-[0.2em] uppercase shadow-lg">Order Now</a>
@@ -435,7 +435,6 @@ export default function Home() {
             quality={50}
             className="object-cover grayscale opacity-20"
           />
-          <div className="hidden md:block absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.15),transparent_70%)] z-10 pointer-events-none" />
           
           {/* Seamless edge blending to remove hard borders */}
           <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#0A0806] to-transparent z-20 pointer-events-none" />
@@ -447,7 +446,7 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="font-serif text-6xl md:text-8xl text-[#FDFCF0] mb-12 leading-tight tracking-tight"
+            className="font-serif text-6xl md:text-8xl text-[#FDFCF0] mb-12 leading-tight tracking-tight drop-shadow-md"
           >
             Taste the Mandhi Everyone <span className="gold-gradient-text">Talks About</span>
           </motion.h2>
@@ -459,7 +458,7 @@ export default function Home() {
               rel="noopener noreferrer"
               whileHover={isMobile ? {} : { scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-full sm:w-auto px-10 md:px-12 py-5 md:py-6 bg-gradient-to-r from-[#D4AF37] via-[#F5C518] to-[#D4AF37] text-[#0A0806] font-bold rounded-full text-[12px] md:text-[13px] tracking-[0.2em] uppercase shadow-none md:shadow-[0_20px_60px_-15px_rgba(212,175,55,0.4)]"
+              className="w-full sm:w-auto px-10 md:px-12 py-5 md:py-6 bg-gradient-to-r from-[#D4AF37] via-[#F5C518] to-[#D4AF37] text-[#0A0806] font-bold rounded-full text-[12px] md:text-[13px] tracking-[0.2em] uppercase shadow-[0_0_40px_rgba(212,175,55,0.4)] transition-all duration-500 hover:shadow-[0_0_60px_rgba(212,175,55,0.7)]"
             >
               Order Online Now
             </motion.a>
