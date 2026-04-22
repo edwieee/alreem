@@ -47,27 +47,27 @@ export default function Home() {
 
       {/* Mobile Optimized Static Hero */}
       <section className="md:hidden relative h-screen min-h-[600px] max-h-[850px] flex flex-col justify-center px-6 overflow-hidden bg-[#0A0806]">
-        {/* Optimized Static Image Background */}
+        {/* Cinematic Static Frame */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/mandhinames/chickenmandhi.webp"
+            src="/mandhiframe/ezgif-frame-150.jpg"
             alt="Al-Reem Premium Mandhi"
             fill
-            quality={65}
+            quality={75}
             priority
-            sizes="(max-width: 800px) 100vw, 800px"
-            className="object-cover object-[80%_center]"
+            sizes="(max-width: 768px) 100vw, 800px"
+            className="object-cover object-center opacity-80"
           />
-          {/* Pure Black Gradient Overlay (70% to 90% opacity) */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0A0806]/70 to-[#0A0806]/90 z-10" />
+          {/* Pure Black Gradient Overlay for perfect contrast */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0806] via-[#0A0806]/80 to-[#0A0806]/30 z-10" />
         </div>
 
-        {/* Content Container (Left-aligned, simplified animation) */}
+        {/* Content Container (Left-aligned, clear hierarchy) */}
         <motion.div 
-          className="relative z-20 flex flex-col gap-6 w-full pt-10"
+          className="relative z-20 flex flex-col gap-6 w-full pt-20"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.3, ease: "linear" }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
         >
           {/* Eyebrow */}
           <div className="flex items-center gap-3">
@@ -78,28 +78,28 @@ export default function Home() {
           </div>
 
           {/* Headline - High Contrast, Tight Leading */}
-          <h1 className="font-serif text-white font-semibold text-[42px] leading-[1.1] tracking-tight">
+          <h1 className="font-serif text-[#FDFCF0] font-medium text-[44px] leading-[1.05] tracking-tight drop-shadow-lg">
             Crafted by <br /><span className="text-[#D4AF37]">Fire.</span>
           </h1>
 
-          {/* Subtext - Reduced Visually in Hierarchy compared to CTA */}
-          <p className="text-white/80 text-[15px] leading-[1.2] font-light max-w-[85%] mt-1">
+          {/* Subtext */}
+          <p className="text-[#FDFCF0]/80 text-[15px] leading-[1.4] font-light max-w-[85%] mt-1">
             Slow cooked underground.<br />Served with heritage.
           </p>
 
-          {/* CTA Group - Not edge-to-edge, strong contrast, no glassmorphism */}
-          <div className="flex flex-col gap-4 w-full max-w-[300px] mt-6">
+          {/* CTA Group */}
+          <div className="flex flex-col gap-4 w-full mt-6">
             <a 
               href="https://www.swiggy.com/search?query=Alreem+Mandhi" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="w-full text-center py-4 rounded-full bg-[#D4AF37] text-[#0A0806] text-[12px] font-bold tracking-[0.2em] uppercase"
+              className="w-full text-center py-[18px] rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F5C518] to-[#D4AF37] text-[#0A0806] text-[12px] font-bold tracking-[0.2em] uppercase shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-opacity hover:opacity-90 active:scale-[0.98]"
             >
-              Order Now
+              Order Online Now
             </a>
             <a 
               href="#menu" 
-              className="w-full text-center py-4 rounded-full border border-white/20 text-white text-[12px] font-bold tracking-[0.2em] uppercase"
+              className="w-full text-center py-[18px] rounded-full border border-[#FDFCF0]/20 text-[#FDFCF0] text-[12px] font-bold tracking-[0.2em] uppercase active:scale-[0.98] active:bg-white/5 transition-all"
             >
               Explore Menu
             </a>
