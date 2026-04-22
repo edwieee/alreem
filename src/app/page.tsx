@@ -18,78 +18,105 @@ export default function Home() {
   });
 
   // Calculate Opacity for different storytelling sections based on scroll percentages
-  // 0-15% Hero
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.1, 0.15], [1, 1, 0]);
-  const heroY = useTransform(scrollYProgress, [0, 0.15], [0, -50]);
+  // 0-20% Hero
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.1, 0.2], [1, 1, 0]);
+  const heroY = useTransform(scrollYProgress, [0, 0.2], [0, -50]);
 
-  // 15-30% Story of Mandhi
-  const storyOpacity = useTransform(scrollYProgress, [0.15, 0.2, 0.25, 0.3], [0, 1, 1, 0]);
-  const storyY = useTransform(scrollYProgress, [0.15, 0.2, 0.25, 0.3], [50, 0, 0, -50]);
+  // 20-40% Story of Mandhi
+  const storyOpacity = useTransform(scrollYProgress, [0.2, 0.25, 0.35, 0.4], [0, 1, 1, 0]);
+  const storyY = useTransform(scrollYProgress, [0.2, 0.25, 0.35, 0.4], [50, 0, 0, -50]);
 
-  // 30-50% Ingredient Reveal
-  const ingredientOpacity = useTransform(scrollYProgress, [0.3, 0.35, 0.45, 0.5], [0, 1, 1, 0]);
-  const ingredientY = useTransform(scrollYProgress, [0.3, 0.35, 0.45, 0.5], [50, 0, 0, -50]);
+  // 40-60% Ingredient Reveal
+  const ingredientOpacity = useTransform(scrollYProgress, [0.4, 0.45, 0.55, 0.6], [0, 1, 1, 0]);
+  const ingredientY = useTransform(scrollYProgress, [0.4, 0.45, 0.55, 0.6], [50, 0, 0, -50]);
 
-  // 50-70% Cooking Experience
-  const cookingOpacity = useTransform(scrollYProgress, [0.5, 0.55, 0.65, 0.7], [0, 1, 1, 0]);
-  const cookingY = useTransform(scrollYProgress, [0.5, 0.55, 0.65, 0.7], [50, 0, 0, -50]);
+  // 60-80% Cooking Experience
+  const cookingOpacity = useTransform(scrollYProgress, [0.6, 0.65, 0.75, 0.8], [0, 1, 1, 0]);
+  const cookingY = useTransform(scrollYProgress, [0.6, 0.65, 0.75, 0.8], [50, 0, 0, -50]);
 
-  // 70-85% Final Reveal
-  const revealOpacity = useTransform(scrollYProgress, [0.7, 0.75, 0.85], [0, 1, 0]);
-  const revealY = useTransform(scrollYProgress, [0.7, 0.75, 0.85], [50, 0, -50]);
+  // 80-100% Final Reveal
+  const revealOpacity = useTransform(scrollYProgress, [0.8, 0.85, 1], [0, 1, 1]);
+  const revealY = useTransform(scrollYProgress, [0.8, 0.85, 1], [50, 0, 0]);
 
   return (
     <main className="min-h-screen bg-[#0A0806]">
       <Navbar />
 
-      {/* Scrollytelling Container (400vh) */}
-      <section ref={containerRef} className="relative h-[400vh]">
+      {/* Scrollytelling Container (300vh) */}
+      <section ref={containerRef} className="relative h-[300vh]">
         {/* Sticky Visuals */}
         <div className="sticky top-0 h-screen overflow-hidden">
           <ImageSequence progress={scrollYProgress} frameCount={188} />
           <HeroParticles />
-          {/* Dark Thematic Gradients for Layers and Image Bleed */}
+          {/* Highly Refined Background Overlays */}
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-            {/* Base cinematic dark vignette */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0)_20%,rgba(10,8,6,0.7)_100%)]" />
+            {/* Scrims: Top and Bottom edge gradients for smooth dark integration */}
+            <div className="absolute inset-x-0 top-0 h-[30%] bg-gradient-to-b from-[#0A0806]/90 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-[#0A0806]/90 to-transparent" />
 
-            {/* Asymmetric 40/60 Layout Text Gradient Shield: Dark on left, fading out carefully on right */}
-            {/* On mobile: cover entire width to ensure text readability over the image. On sm/md+: partial width. */}
-            <div
-              className="absolute inset-y-0 left-0 w-full sm:w-[55%]"
-              style={{
-                background: "linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0.15) 60%, transparent 80%)"
-              }}
-            />
-            {/* Additional mobile-only bottom gradient to darken ground area under text if needed */}
-            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0A0806] to-transparent sm:hidden opacity-80" />
+            {/* Global base darkening */}
+            <div className="absolute inset-0 bg-[#0A0806]/10" />
 
-            {/* Pure sharp radial glow directly behind the text for absolute readability against the bright chicken */}
-            <div className="absolute top-[30%] left-[-10%] w-[120vw] h-[120vw] md:w-[60vw] md:h-[60vw] bg-[radial-gradient(circle,rgba(10,8,6,0.8)_0%,rgba(10,8,6,0.3)_40%,transparent_70%)] blur-2xl md:blur-3xl opacity-90 md:opacity-80 mix-blend-multiply" />
-
-            {/* Moderate Vignette Specifically Behind Text Block to improve contrast without hiding right side visuals */}
-            <div className="absolute top-[10%] left-[-20%] w-[120vw] h-[120vw] md:w-[70vw] md:h-[80vw] bg-[radial-gradient(circle,rgba(0,0,0,0.8)_0%,rgba(0,0,0,0.4)_40%,transparent_70%)] blur-2xl md:blur-3xl z-0 pointer-events-none" />
+            {/* Left 40% clean dark canvas fading to 60% right visual */}
+            <div className="absolute inset-y-0 left-0 w-[100%] sm:w-[60%] md:w-[50%] bg-gradient-to-r from-[#0A0806] via-[#0A0806]/80 to-transparent" />
           </div>
           {/* 1. Hero (0-15%) */}
           <motion.div
             style={{ opacity: heroOpacity, y: heroY }}
-            className="absolute inset-0 flex flex-col justify-center px-6 md:px-8 md:pl-[6vw]"
+            className="absolute inset-0 flex flex-col justify-center px-6 md:px-16 lg:px-24 pointer-events-none"
           >
-            <div className="w-full md:w-[40vw] max-w-[550px] relative z-10 pt-[15vh] md:pt-[10vh]">
-              <motion.h1
-                initial={{ y: 30, opacity: 0 }}
+            <div className="w-full md:w-[45vw] max-w-[650px] relative z-10 pt-[12vh] pointer-events-auto">
+              {/* Overhead Rhythm Label */}
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                className="font-serif text-[#FDFCF0] font-bold leading-[1.05] tracking-[-0.04em] mb-[24px] drop-shadow-[0_10px_40px_rgba(0,0,0,0.8)]"
-                style={{ fontSize: "clamp(44px, 5vw, 64px)" }}
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                className="flex items-center gap-4 mb-6"
               >
-                Crafted by Fire. <br /> Perfected by Time.
-              </motion.h1>
+                <span className="text-[#D4AF37] text-[10px] md:text-[11px] font-sans tracking-[0.3em] uppercase font-bold">
+                  The Original Kuzhi Mandhi
+                </span>
+                <div className="w-12 h-[1px] bg-[#D4AF37]/50" />
+              </motion.div>
+
+              <div className="overflow-hidden mb-1">
+                <motion.h1
+                  initial={{ y: "100%", opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                  className="font-serif text-[#F9F6F0] font-semibold leading-[1.05] tracking-[-0.03em] drop-shadow-xl"
+                  style={{ fontSize: "clamp(48px, 6vw, 84px)" }}
+                >
+                  Crafted by <span className="text-[#D4AF37]">Fire.</span>
+                </motion.h1>
+              </div>
+              <div className="overflow-hidden mb-1">
+                <motion.h1
+                  initial={{ y: "100%", opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 1.2, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+                  className="font-serif text-[#F9F6F0] font-semibold leading-[1.05] tracking-[-0.03em] drop-shadow-xl"
+                  style={{ fontSize: "clamp(48px, 6vw, 84px)" }}
+                >
+                  Perfected by
+                </motion.h1>
+              </div>
+              <div className="overflow-hidden mb-10">
+                <motion.h1
+                  initial={{ y: "100%", opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                  className="font-serif text-[#D4AF37] font-semibold leading-[1.05] tracking-[-0.03em] drop-shadow-xl"
+                  style={{ fontSize: "clamp(48px, 6vw, 84px)" }}
+                >
+                  Time.
+                </motion.h1>
+              </div>
               <motion.p
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                className="text-[#FDFCF0]/80 mb-[32px] max-w-[500px] font-sans font-light leading-[1.65] tracking-[0.02em] text-[18px] md:text-[22px] drop-shadow-[0_4px_20px_rgba(0,0,0,1)] mix-blend-plus-lighter"
+                className="text-[#E5E5E5] mb-12 max-w-[480px] font-sans antialiased font-light leading-relaxed tracking-[0.02em] text-[16px] md:text-[18px] opacity-90 drop-shadow-sm"
               >
                 Slow cooked underground. Served with heritage.<br />Loved across Kerala.
               </motion.p>
@@ -97,22 +124,27 @@ export default function Home() {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="flex flex-col sm:flex-row w-full sm:w-auto gap-[12px] sm:gap-[18px]"
+                className="flex flex-col sm:flex-row w-full sm:w-auto gap-[20px]"
               >
                 <a
-                  href="#menu"
-                  className="relative overflow-hidden w-full sm:w-auto text-center px-[42px] py-[16px] sm:py-[18px] rounded-[50px] bg-gradient-to-r from-[#D4AF37] via-[#F5C518] to-[#D4AF37] text-[#0A0806] text-[13px] font-bold tracking-[0.15em] uppercase hover:-translate-y-[2px] transition-transform duration-500 shadow-[0_10px_40px_-10px_rgba(212,175,55,0.6)] group"
+                  href="https://www.swiggy.com/search?query=Alreem+Mandhi"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative flex items-center justify-center gap-3 px-[40px] py-[18px] rounded-full bg-[#D4AF37] text-[#0A0806] text-[12px] font-sans font-bold tracking-[0.2em] uppercase transition-all duration-500 ease-out transform hover:-translate-y-1 hover:scale-105 hover:bg-[#F5C518] shadow-lg hover:shadow-[0_15px_40px_-10px_rgba(212,175,55,0.7)]"
                 >
-                  <span className="relative z-10">Order Now</span>
-                  <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent transition-transform duration-1000 ease-out group-hover:translate-x-[150%]" />
+                  Order Now
+                  <svg className="w-4 h-4 transition-transform duration-500 ease-out group-hover:translate-x-2 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
                 </a>
                 <a
-                  href="#story"
-                  className="relative overflow-hidden w-full sm:w-auto text-center px-[42px] py-[16px] sm:py-[18px] rounded-[50px] border-[1.5px] border-[#FDFCF0]/40 bg-[#FDFCF0]/[0.15] backdrop-blur-[16px] text-[#FDFCF0] text-[13px] font-bold tracking-[0.15em] uppercase hover:bg-[#FDFCF0]/25 hover:border-[#FDFCF0]/60 transition-all duration-500 shadow-[inset_0_1px_2px_rgba(255,255,255,0.3),0_8px_32px_rgba(0,0,0,0.4)] group"
+                  href="#menu"
+                  className="group flex items-center justify-center gap-3 px-[32px] py-[18px] rounded-full border border-white/10 bg-white/5 text-[#F9F6F0] text-[12px] font-sans font-medium tracking-[0.3em] uppercase transition-all duration-500 ease-out transform hover:-translate-y-1 hover:scale-105 hover:bg-white/10 hover:border-white/30 backdrop-blur-md"
                 >
-                  <span className="relative z-10 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Discover the Story</span>
-                  {/* Subtle glass reflection effect on hover */}
-                  <div className="absolute inset-0 -translate-x-[150%] skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-[150%]" />
+                  Explore Menus
+                  <svg className="w-4 h-4 text-[#D4AF37] opacity-0 -ml-4 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:ml-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
                 </a>
               </motion.div>
             </div>
@@ -122,22 +154,28 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 2, delay: 1 }}
-              className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-60 mix-blend-screen"
+              className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 pointer-events-none"
             >
-              <span className="text-[10px] text-[#FDFCF0] font-sans font-bold tracking-[0.2em] uppercase">Scroll to Experience</span>
-              <div className="w-[1px] h-12 bg-gradient-to-b from-[#D4AF37] to-transparent animate-[fall_1.5s_ease-in-out_infinite]" />
+              <div className="w-[1px] h-10 bg-[#FDFCF0]/20 overflow-hidden relative">
+                <motion.div
+                  initial={{ y: "-100%" }}
+                  animate={{ y: "200%" }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute inset-x-0 top-0 w-full h-[40%] bg-[#D4AF37]"
+                />
+              </div>
             </motion.div>
           </motion.div>
 
           {/* 2. Story (15-30%) */}
           <motion.div
             style={{ opacity: storyOpacity, y: storyY }}
-            className="absolute inset-x-8 md:inset-x-24 top-1/2 -translate-y-1/2 max-w-2xl text-left"
+            className="absolute inset-x-6 md:inset-x-16 lg:inset-x-24 top-1/2 -translate-y-1/2 w-full md:w-[45vw] max-w-2xl text-left pointer-events-none"
           >
-            <h2 className="font-serif text-4xl md:text-6xl text-[#D4AF37] mb-6 font-bold drop-shadow-[0_4px_24px_rgba(0,0,0,1)]">
-              Mandhi is not just <br /> rice and meat.
+            <h2 className="font-serif text-[40px] md:text-[64px] text-[#FDFCF0] leading-[1.1] tracking-[-0.02em] mb-6 font-medium">
+              Mandhi is not just <br /> <span className="text-[#D4AF37] italic font-light">rice and meat.</span>
             </h2>
-            <div className="space-y-4 text-xl md:text-2xl text-[#FDFCF0]/90 leading-relaxed font-light drop-shadow-[0_2px_12px_rgba(0,0,0,1)]">
+            <div className="space-y-2 text-lg md:text-2xl text-[#FDFCF0]/60 leading-relaxed font-light">
               <p>It is fire. It is patience. It is tradition.</p>
             </div>
           </motion.div>
@@ -145,12 +183,12 @@ export default function Home() {
           {/* 3. Ingredients (30-50%) */}
           <motion.div
             style={{ opacity: ingredientOpacity, y: ingredientY }}
-            className="absolute inset-x-8 md:inset-x-24 top-1/2 -translate-y-1/2 max-w-2xl ml-auto text-right"
+            className="absolute inset-x-6 md:inset-x-16 lg:inset-x-24 top-1/2 -translate-y-1/2 w-full md:w-[45vw] max-w-2xl text-left pointer-events-none"
           >
-            <h2 className="font-serif text-4xl md:text-6xl text-[#D4AF37] mb-6 font-bold drop-shadow-[0_4px_24px_rgba(0,0,0,1)]">
-              Only the finest ingredients.
+            <h2 className="font-serif text-[40px] md:text-[64px] text-[#FDFCF0] leading-[1.1] tracking-[-0.02em] mb-6 font-medium">
+              Only the <br /><span className="text-[#D4AF37] italic font-light">finest ingredients.</span>
             </h2>
-            <div className="space-y-4 text-xl md:text-2xl text-[#FDFCF0]/90 leading-relaxed font-light drop-shadow-[0_2px_12px_rgba(0,0,0,1)]">
+            <div className="space-y-2 text-lg md:text-2xl text-[#FDFCF0]/60 leading-relaxed font-light">
               <p>Fragrant basmati rice.</p>
               <p>Hand-selected spices. Fresh cuts of meat.</p>
               <p>Combined with fire and time.</p>
@@ -160,12 +198,12 @@ export default function Home() {
           {/* 4. Cooking (50-70%) */}
           <motion.div
             style={{ opacity: cookingOpacity, y: cookingY }}
-            className="absolute inset-x-8 md:inset-x-24 top-1/2 -translate-y-1/2 max-w-2xl text-left"
+            className="absolute inset-x-6 md:inset-x-16 lg:inset-x-24 top-1/2 -translate-y-1/2 w-full md:w-[45vw] max-w-2xl text-left pointer-events-none"
           >
-            <h2 className="font-serif text-4xl md:text-6xl text-[#D4AF37] mb-6 font-bold drop-shadow-[0_4px_24px_rgba(0,0,0,1)]">
-              Slow cooked beneath the earth.
+            <h2 className="font-serif text-[40px] md:text-[64px] text-[#FDFCF0] leading-[1.1] tracking-[-0.02em] mb-6 font-medium">
+              Slow cooked <br /><span className="text-[#D4AF37] italic font-light">beneath the earth.</span>
             </h2>
-            <div className="space-y-4 text-xl md:text-2xl text-[#FDFCF0]/90 leading-relaxed font-light drop-shadow-[0_2px_12px_rgba(0,0,0,1)]">
+            <div className="space-y-4 text-lg md:text-2xl text-[#FDFCF0]/60 leading-relaxed font-light">
               <p>Cooked underground with controlled heat and aromatic spices.</p>
               <p>Every grain absorbs deep, authentic flavor.</p>
             </div>
@@ -173,15 +211,20 @@ export default function Home() {
 
           {/* 5. Reveal (70-85%) */}
           <motion.div
+            style={{ opacity: revealOpacity }}
+            className="absolute inset-0 bg-[#0A0806]/60 backdrop-blur-md z-0 pointer-events-none"
+          />
+
+          <motion.div
             style={{ opacity: revealOpacity, y: revealY }}
-            className="absolute inset-0 flex flex-col items-center justify-center text-center px-4"
+            className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 z-10 pointer-events-none"
           >
-            <h2 className="font-serif text-5xl md:text-7xl text-[#D4AF37] mb-6 max-w-4xl font-bold drop-shadow-[0_4px_24px_rgba(0,0,0,1)]">
-              The taste Kerala fell in love with.
+            <h2 className="font-serif text-[48px] md:text-[84px] text-[#FDFCF0] mb-8 max-w-4xl font-medium leading-[1.05] tracking-[-0.03em]">
+              The taste Kerala <br /><span className="text-[#D4AF37] italic font-light">fell in love with.</span>
             </h2>
-            <div className="space-y-4 text-2xl md:text-3xl text-[#FDFCF0]/90 font-light drop-shadow-[0_2px_12px_rgba(0,0,0,1)]">
+            <div className="text-xl md:text-2xl text-[#FDFCF0]/80 font-light flex flex-col items-center">
               <p>Tender meat. Fragrant rice. Fire-crafted flavor.</p>
-              <p className="mt-6 text-[#D4AF37] italic font-medium drop-shadow-[0_2px_12px_rgba(0,0,0,1)]">Mandhi the way it was meant to be.</p>
+              <p className="mt-8 text-[14px] text-[#D4AF37] tracking-[0.2em] uppercase font-bold">Mandhi the way it was meant to be.</p>
             </div>
           </motion.div>
 
@@ -223,22 +266,37 @@ export default function Home() {
               desc: "Blends sweet and spicy flavors with tender meat, aromatic rice, and a drizzle of honey chili glaze for a bold fusion twist.",
               image: "/mandhinames/honey-chilly-mandhi.webp"
             }
-          ].map((item) => (
-            <div key={item.name} className="relative h-[400px] rounded-2xl border border-[#D4AF37]/20 p-8 flex flex-col justify-end overflow-hidden group cursor-pointer transition-all duration-500 hover:border-[#D4AF37]/50 shadow-lg shadow-black/20">
-              {/* Image Background */}
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+          ].map((item, index) => (
+            <motion.div
+              key={item.name}
+              initial={{ y: 40, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="relative h-[400px] md:h-[420px] lg:h-[440px] rounded-[1.5rem] overflow-hidden group cursor-pointer border border-[#D4AF37]/30 transition-all duration-700 shadow-xl hover:border-[#D4AF37]/50 hover:shadow-[0_20px_40px_-10px_rgba(212,175,55,0.15)]"
+            >
+              {/* Image Background with Parallax */}
+              <motion.div
+                className="absolute inset-0 bg-cover bg-center"
+                whileHover={{ scale: 1.08 }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                 style={{ backgroundImage: `url(${item.image})` }}
               />
 
-              {/* Fade Up Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0806] via-[#0A0806]/80 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-100" />
+              {/* Permanent Bottom Dark Gradient Scrim */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0806] via-[#0A0806]/70 to-transparent opacity-95 pointer-events-none" />
 
-              <div className="relative z-10 transition-transform duration-500 group-hover:-translate-y-2">
-                <h3 className="font-serif text-3xl text-[#D4AF37] mb-3 drop-shadow-[0_2px_12px_rgba(0,0,0,1)]">{item.name}</h3>
-                <p className="text-[#FDFCF0]/80 font-light text-base leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,1)]">{item.desc}</p>
+              {/* Text Container with slight upward lift on hover */}
+              <div className="absolute inset-x-0 bottom-0 z-10 p-8 flex flex-col justify-end transition-transform duration-700 group-hover:-translate-y-2 pointer-events-none">
+                <h3 className="font-sans text-[32px] md:text-[34px] font-medium text-[#D4AF37] mb-3">
+                  {item.name}
+                </h3>
+
+                <p className="text-[#FDFCF0]/90 font-sans font-light text-[15px] md:text-[16px] leading-[1.7]">
+                  {item.desc}
+                </p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
@@ -246,26 +304,125 @@ export default function Home() {
       {/* Dynamic Testimonials / Social Proof */}
       <TestimonialsSection />
 
-      {/* Restaurant Experience */}
-      <section id="experience" className="py-32 px-6 md:px-12 text-center max-w-4xl mx-auto">
-        <h2 className="font-serif text-5xl md:text-6xl text-[#D4AF37] mb-8 leading-tight">
-          Food tastes better<br />when shared.
-        </h2>
-        <p className="text-xl md:text-2xl text-[#FDFCF0]/80 font-light max-w-2xl mx-auto">
-          Experience the warmth of Arabian hospitality in our modern, premium dining spaces designed for families and friends.
-        </p>
+      {/* Restaurant Experience Redesign */}
+      <section id="experience" className="py-40 px-6 md:px-12 bg-[#0A0806]">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <motion.div
+            initial={{ x: -60, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="relative"
+          >
+            <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl shadow-black/80 relative bg-[#0A0806]">
+              <img
+                src="/experience-plate.png"
+                alt="Al-Reem Luxury Dining"
+                className="w-full h-full object-cover transition-transform duration-[2.5s] ease-out hover:scale-[1.08] opacity-90"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0806]/80 via-transparent to-transparent" />
+            </div>
+            {/* Floating decorative elements */}
+            <div className="absolute -bottom-10 -right-10 w-48 h-48 border border-[#D4AF37]/20 rounded-full blur-2xl animate-pulse" />
+            <div className="absolute -top-10 -left-10 w-32 h-32 bg-[#D4AF37]/5 rounded-full blur-xl" />
+          </motion.div>
+
+          <div className="text-left">
+            <motion.span
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-[#D4AF37] font-sans font-bold tracking-[0.3em] uppercase text-xs mb-6 block"
+            >
+              The Al-Reem Atmosphere
+            </motion.span>
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="font-serif text-5xl md:text-7xl text-[#FDFCF0] mb-8 leading-[1.1]"
+            >
+              Food tastes better <br />
+              <span className="text-[#D4AF37] italic">when shared.</span>
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-xl text-[#FDFCF0]/70 font-light max-w-xl leading-relaxed mb-12"
+            >
+              Experience the warmth of Arabian hospitality in our modern, premium dining spaces designed for families and friends to create lasting memories over authentic flavors.
+            </motion.p>
+
+            <div className="grid grid-cols-2 gap-8 mb-12 border-y border-[#D4AF37]/10 py-10">
+              <div>
+                <h4 className="text-[#D4AF37] font-serif text-2xl mb-2">Modern Luxury</h4>
+                <p className="text-sm text-[#FDFCF0]/60">Elegantly designed interiors that blend tradition with contemporary aesthetics.</p>
+              </div>
+              <div>
+                <h4 className="text-[#D4AF37] font-serif text-2xl mb-2">Arabic Heritage</h4>
+                <p className="text-sm text-[#FDFCF0]/60">Authentic recipes passed down through generations, prepared with pride.</p>
+              </div>
+            </div>
+
+            <motion.a
+              href="/branches"
+              whileHover={{ x: 10 }}
+              className="inline-flex items-center gap-4 text-[#D4AF37] font-bold tracking-widest uppercase text-xs group"
+            >
+              Explore our locations
+              <span className="w-12 h-[1px] bg-[#D4AF37] group-hover:w-20 transition-all duration-500" />
+            </motion.a>
+          </div>
+        </div>
       </section>
 
-      {/* Final CTA */}
-      <section id="order" className="py-32 px-6 text-center max-w-3xl mx-auto">
-        <h2 className="font-serif text-5xl md:text-6xl text-[#C8A96A] mb-8">Taste the Mandhi Everyone Talks About</h2>
-        <div className="flex flex-col sm:flex-row justify-center gap-4 mt-12">
-          <a href="#" className="px-8 py-4 bg-[#C8A96A] text-[#0E0C0A] font-medium rounded-full text-lg tracking-wide hover:bg-white transition-colors">
-            Order Online
-          </a>
-          <a href="/branches" className="px-8 py-4 border border-[#C8A96A] text-[#C8A96A] rounded-full text-lg tracking-wide hover:bg-[#C8A96A]/10 transition-colors">
-            Visit a Branch
-          </a>
+      {/* Final CTA Redesign */}
+      <section id="order" className="py-40 px-6 relative overflow-hidden">
+        {/* Cinematic background for CTA */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-[#0A0806]/90 z-10" />
+          <img
+            src="/order-bg.jpg"
+            alt="CTA Background"
+            className="w-full h-full object-cover grayscale opacity-20"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=1974";
+            }}
+          />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.15),transparent_70%)]" />
+        </div>
+
+        <div className="relative z-10 text-center max-w-4xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="font-serif text-6xl md:text-8xl text-[#FDFCF0] mb-12 leading-tight tracking-tight"
+          >
+            Taste the Mandhi Everyone <span className="gold-gradient-text">Talks About</span>
+          </motion.h2>
+
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-8 mt-16">
+            <motion.a
+              href="https://www.swiggy.com/search?query=Alreem+Mandhi"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-12 py-6 bg-gradient-to-r from-[#D4AF37] via-[#F5C518] to-[#D4AF37] text-[#0A0806] font-bold rounded-full text-[13px] tracking-[0.2em] uppercase shadow-[0_20px_60px_-15px_rgba(212,175,55,0.4)]"
+            >
+              Order Online Now
+            </motion.a>
+            <motion.a
+              href="/branches"
+              whileHover={{ backgroundColor: "rgba(253, 252, 240, 0.05)" }}
+              className="px-12 py-6 border border-[#FDFCF0]/20 text-[#FDFCF0] rounded-full text-[13px] tracking-[0.2em] uppercase backdrop-blur-sm"
+            >
+              Visit a Branch
+            </motion.a>
+          </div>
         </div>
       </section>
 

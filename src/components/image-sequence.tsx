@@ -9,6 +9,7 @@ interface ImageSequenceProps {
 }
 
 export function ImageSequence({ progress, frameCount }: ImageSequenceProps) {
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [images, setImages] = useState<HTMLImageElement[]>([]);
   const [loaded, setLoaded] = useState(false);
@@ -49,9 +50,12 @@ export function ImageSequence({ progress, frameCount }: ImageSequenceProps) {
     const img = images[Math.round(index)];
     if (!img) return;
 
-    // Set canvas dimensions to window size
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
+
+    // Set canvas dimensions to wrapper size
+    canvas.width = wrapper.clientWidth;
+    canvas.height = wrapper.clientHeight;
 
     // Calculate object-fit cover dimensions
     const canvasRatio = canvas.width / canvas.height;
@@ -96,9 +100,11 @@ export function ImageSequence({ progress, frameCount }: ImageSequenceProps) {
   });
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="absolute top-0 left-0 w-full h-full object-cover"
-    />
+    <div ref={wrapperRef} className="absolute top-0 right-0 w-full md:w-[70%] lg:w-[60%] h-full">
+      <canvas
+        ref={canvasRef}
+        className="w-full h-full object-cover"
+      />
+    </div>
   );
 }

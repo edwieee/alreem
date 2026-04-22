@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { Inter, Noto_Naskh_Arabic } from "next/font/google";
-import localFont from "next/font/local";
+import { Inter, Playfair_Display } from "next/font/google";
 import { SmoothScroll } from "@/components/smooth-scroll";
+import { CustomCursor } from "@/components/custom-cursor";
 import "./globals.css";
 
 const inter = Inter({
@@ -9,20 +9,14 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-const aglatia = localFont({
-  src: "../../public/fonts/agelia/Agelia DEMO.otf",
-  variable: "--font-aglatia",
-});
-
-const notoNaskh = Noto_Naskh_Arabic({
-  variable: "--font-noto-naskh",
-  subsets: ["arabic"],
-  weight: ["400", "700"],
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Al-Reem Mandhi | The Original Kuzhi Mandhi Experience",
-  description: "Authentic Arabian mandhi experience. Slow cooked underground. Served with heritage. Loved across Kerala.",
+  title: "Greenora | Modern Landscaping & Gardening",
+  description: "A minimal Framer template designed for landscaping and gardening businesses.",
 };
 
 export default function RootLayout({
@@ -31,10 +25,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="selection:bg-[#3A5F45] selection:text-[#F9F8F6]">
       <body
-        className={`${inter.variable} ${aglatia.variable} ${notoNaskh.variable} antialiased bg-[#0A0806] text-[#FDFCF0] selection:bg-[#D4AF37] selection:text-[#0A0806] min-h-screen`}
+        className={`${inter.variable} ${playfair.variable} antialiased min-h-screen`}
       >
+        <div className="noise-overlay" />
+        <CustomCursor />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
