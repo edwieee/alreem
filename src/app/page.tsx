@@ -46,37 +46,65 @@ export default function Home() {
       <Navbar />
 
       {/* Mobile Optimized Static Hero */}
-      <section className="md:hidden relative h-[90vh] min-h-[600px] flex flex-col justify-end px-6 pb-20 overflow-hidden">
+      <section className="md:hidden relative h-screen min-h-[600px] max-h-[850px] flex flex-col justify-center px-6 overflow-hidden bg-[#0A0806]">
+        {/* Optimized Static Image Background */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/mandhiframe/ezgif-frame-150.jpg"
+            src="/mandhinames/chickenmandhi.webp"
             alt="Al-Reem Premium Mandhi"
             fill
             quality={65}
             priority
-            sizes="100vw"
-            className="object-cover opacity-60"
+            sizes="(max-width: 800px) 100vw, 800px"
+            className="object-cover object-[80%_center]"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0806] via-[#0A0806]/80 to-transparent" />
+          {/* Pure Black Gradient Overlay (70% to 90% opacity) */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A0806]/70 to-[#0A0806]/90 z-10" />
         </div>
-        <div className="relative z-10 flex flex-col gap-4 w-full">
-          <div className="flex items-center gap-3 mb-2">
-            <span className="text-[#D4AF37] text-[10px] uppercase font-bold tracking-widest">
+
+        {/* Content Container (Left-aligned, simplified animation) */}
+        <motion.div 
+          className="relative z-20 flex flex-col gap-6 w-full pt-10"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3, ease: "linear" }}
+        >
+          {/* Eyebrow */}
+          <div className="flex items-center gap-3">
+            <span className="text-[#D4AF37] text-[10px] uppercase font-bold tracking-[0.2em]">
               The Original Kuzhi Mandhi
             </span>
-            <div className="w-8 h-[1px] bg-[#D4AF37]/50" />
+            <div className="w-8 h-[1px] bg-[#D4AF37]" />
           </div>
-          <h1 className="font-serif text-[#F9F6F0] font-semibold text-[44px] leading-[1.1] pb-2 shadow-black/50 drop-shadow-lg">
+
+          {/* Headline - High Contrast, Tight Leading */}
+          <h1 className="font-serif text-white font-semibold text-[42px] leading-[1.1] tracking-tight">
             Crafted by <br /><span className="text-[#D4AF37]">Fire.</span>
           </h1>
-          <p className="text-[#E5E5E5] text-[15px] leading-relaxed opacity-90 font-light mt-2 mb-6">
+
+          {/* Subtext - Reduced Visually in Hierarchy compared to CTA */}
+          <p className="text-white/80 text-[15px] leading-[1.2] font-light max-w-[85%] mt-1">
             Slow cooked underground.<br />Served with heritage.
           </p>
-          <div className="flex flex-col gap-4 w-full">
-            <a href="https://www.swiggy.com/search?query=Alreem+Mandhi" target="_blank" rel="noopener noreferrer" className="w-full text-center py-[18px] rounded-full bg-[#D4AF37] text-[#0A0806] text-[12px] font-bold tracking-[0.2em] uppercase shadow-lg">Order Now</a>
-            <a href="#menu" className="w-full text-center py-[18px] rounded-full border border-white/20 bg-white/5 text-[#F9F6F0] text-[12px] font-medium tracking-[0.2em] uppercase backdrop-blur-sm">Explore Menus</a>
+
+          {/* CTA Group - Not edge-to-edge, strong contrast, no glassmorphism */}
+          <div className="flex flex-col gap-4 w-full max-w-[300px] mt-6">
+            <a 
+              href="https://www.swiggy.com/search?query=Alreem+Mandhi" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="w-full text-center py-4 rounded-full bg-[#D4AF37] text-[#0A0806] text-[12px] font-bold tracking-[0.2em] uppercase"
+            >
+              Order Now
+            </a>
+            <a 
+              href="#menu" 
+              className="w-full text-center py-4 rounded-full border border-white/20 text-white text-[12px] font-bold tracking-[0.2em] uppercase"
+            >
+              Explore Menu
+            </a>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Scrollytelling Container (Desktop Only, 300vh) */}
