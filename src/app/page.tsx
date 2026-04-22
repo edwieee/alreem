@@ -78,9 +78,14 @@ export default function Home() {
           </div>
 
           {/* Headline - High Contrast, Tight Leading */}
-          <h1 className="font-serif text-[#FDFCF0] font-medium text-[44px] leading-[1.05] tracking-tight drop-shadow-lg">
-            Crafted by <br /><span className="text-[#D4AF37]">Fire.</span>
-          </h1>
+          <div className="flex flex-col gap-1">
+            <h1 className="font-serif text-[#FDFCF0] font-medium text-[44px] leading-[1.05] tracking-tight drop-shadow-lg">
+              Crafted by <span className="text-[#D4AF37]">Fire.</span>
+            </h1>
+            <h2 className="font-serif text-[#FDFCF0]/95 font-medium text-[36px] leading-[1.05] tracking-tight drop-shadow-lg">
+              Perfected by <span className="text-[#D4AF37] italic font-light">Time.</span>
+            </h2>
+          </div>
 
           {/* Subtext */}
           <p className="text-[#FDFCF0]/80 text-[15px] leading-[1.4] font-light max-w-[85%] mt-1">
