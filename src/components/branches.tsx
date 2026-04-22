@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { Phone, MapPin } from 'lucide-react';
 
 const branches = [
@@ -101,10 +102,13 @@ export function Branches() {
             className="group relative min-h-[520px] rounded-[20px] border border-[#FDFCF0]/10 p-8 flex flex-col justify-end overflow-hidden transition-all duration-700 hover:-translate-y-3 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8),0_0_0_1px_rgba(212,175,55,0.3)] shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] bg-[#0A0806]"
           >
             {/* Image Background */}
-            <div
-              /* 8. Image Framing, 7. Image Scale, 13. Image Tone Consistency (brightness/contrast) */
-              className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.05] brightness-90 contrast-[1.1]"
-              style={{ backgroundImage: `url(${branch.image})` }}
+            <Image
+              src={branch.image}
+              alt={branch.name}
+              fill
+              quality={75}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover object-center transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.05] brightness-90 contrast-[1.1] z-0"
             />
 
             {/* 1. Image Readability Gradient */}
