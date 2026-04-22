@@ -423,7 +423,7 @@ export default function Home() {
       </section>
 
       {/* Final CTA Redesign */}
-      <section id="order" className="py-24 md:py-40 px-4 md:px-6 relative overflow-hidden">
+      <section id="order" className="py-24 md:py-40 px-4 md:px-6 relative overflow-hidden bg-[#0A0806]">
         {/* Cinematic background for CTA */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-[#0A0806]/90 z-10" />
@@ -436,6 +436,10 @@ export default function Home() {
             className="object-cover grayscale opacity-20"
           />
           <div className="hidden md:block absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.15),transparent_70%)] z-10 pointer-events-none" />
+          
+          {/* Seamless edge blending to remove hard borders */}
+          <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#0A0806] to-transparent z-20 pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0A0806] to-transparent z-20 pointer-events-none" />
         </div>
 
         <div className="relative z-10 text-center max-w-4xl mx-auto">

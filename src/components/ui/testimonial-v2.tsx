@@ -125,7 +125,7 @@ export default function TestimonialsSection() {
   return (
     <section
       aria-labelledby="testimonials-heading"
-      className="bg-[#0A0806] py-24 relative overflow-hidden border-y border-[#D4AF37]/10"
+      className="bg-[#0A0806] py-24 relative overflow-hidden"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#2B1B12_0%,transparent_70%)] opacity-30" />
       <motion.div

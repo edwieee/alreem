@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 export function Footer() {
   return (
-    <footer className="bg-[#0A0806] text-[#FDFCF0] pt-32 pb-12 px-6 md:px-12 border-t border-[#D4AF37]/10 relative overflow-hidden">
+    <footer className="bg-[#0A0806] text-[#FDFCF0] pt-32 pb-12 px-6 md:px-12 relative overflow-hidden">
       {/* Subtle background glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-[radial-gradient(circle,rgba(212,175,55,0.05)_0%,transparent_70%)] pointer-events-none" />
 
