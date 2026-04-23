@@ -21,7 +21,7 @@ export function AboutSection() {
               We provide complete, reliable, and affordable landscaping solutions across the USA.
             </h2>
             <p className="text-lg text-[#4A6046] leading-relaxed">
-              At Greenora, we create beautiful, functional outdoor spaces with care and expertise. From design to maintenance, we ensure your outdoor spaces are built to last.
+              At Al-Reem, we create beautiful, functional outdoor spaces with care and expertise. From design to maintenance, we ensure your outdoor spaces are built to last.
             </p>
           </motion.div>
 

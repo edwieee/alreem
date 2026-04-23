@@ -25,7 +25,7 @@ export function HeroSection() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <span className="text-sm font-semibold tracking-wider text-[#3A5F45] uppercase mb-4 block">
-            Greenora Landscape & Design
+            Al-Reem Landscape & Design
           </span>
           <h1 className="text-5xl md:text-7xl font-bold text-[#1C241F] leading-tight mb-6">
             Expert Landscaping, Personalized for You

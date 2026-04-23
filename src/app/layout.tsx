@@ -14,7 +14,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Greenora | Modern Landscaping & Gardening",
+  title: "Al-Reem | Modern Landscaping & Gardening",
   description: "A minimal Framer template designed for landscaping and gardening businesses.",
 };
 

@@ -63,7 +63,7 @@ export default function Home() {
         </div>
 
         {/* Content Container (Left-aligned, clear hierarchy) */}
-        <motion.div 
+        <motion.div
           className="relative z-20 flex flex-col gap-6 w-full pt-20"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -83,7 +83,7 @@ export default function Home() {
               Crafted by <span className="text-[#D4AF37]">Fire.</span>
             </h1>
             <h2 className="font-serif text-[#FDFCF0]/95 font-medium text-[36px] leading-[1.05] tracking-tight drop-shadow-lg">
-              Perfected by <span className="text-[#D4AF37] italic font-light">Time.</span>
+              Perfected by <span className="text-[#D4AF37] ">Time.</span>
             </h2>
           </div>
 
@@ -94,16 +94,16 @@ export default function Home() {
 
           {/* CTA Group */}
           <div className="flex flex-col gap-4 w-full mt-6">
-            <a 
-              href="https://www.swiggy.com/search?query=Alreem+Mandhi" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href="https://www.swiggy.com/search?query=Alreem+Mandhi"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-full text-center py-[18px] rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F5C518] to-[#D4AF37] text-[#0A0806] text-[12px] font-bold tracking-[0.2em] uppercase shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-opacity hover:opacity-90 active:scale-[0.98]"
             >
               Order Online Now
             </a>
-            <a 
-              href="#menu" 
+            <a
+              href="#menu"
               className="w-full text-center py-[18px] rounded-full border border-[#FDFCF0]/20 text-[#FDFCF0] text-[12px] font-bold tracking-[0.2em] uppercase active:scale-[0.98] active:bg-white/5 transition-all"
             >
               Explore Menu
@@ -468,7 +468,7 @@ export default function Home() {
             quality={50}
             className="object-cover grayscale opacity-20"
           />
-          
+
           {/* Seamless edge blending to remove hard borders */}
           <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#0A0806] to-transparent z-20 pointer-events-none" />
           <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0A0806] to-transparent z-20 pointer-events-none" />
