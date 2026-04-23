@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="selection:bg-[#3A5F45] selection:text-[#F9F8F6]">
+    <html lang="en" className="selection:bg-[#D4AF37] selection:text-[#0A0806]">
       <body
         className={`${inter.variable} ${playfair.variable} antialiased min-h-screen`}
       >

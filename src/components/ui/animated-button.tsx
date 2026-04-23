@@ -23,9 +23,9 @@ export const AnimatedButton = ({
   const baseStyles = "relative inline-flex items-center justify-center px-6 py-3 text-sm font-medium transition-colors overflow-hidden rounded-full";
   
   const variants = {
-    primary: "bg-[#1E3A2B] text-white hover:bg-[#3A5F45]",
-    secondary: "bg-[#DCE5DE] text-[#1E3A2B] hover:bg-[#c9d4cc]",
-    outline: "border border-[#1E3A2B] text-[#1E3A2B] hover:bg-[#1E3A2B] hover:text-white"
+    primary: "bg-[#D4AF37] text-[#0A0806] hover:bg-[#F5C518] shadow-[0_0_20px_rgba(212,175,55,0.2)]",
+    secondary: "bg-[#2B1B12] text-[#D4AF37] hover:bg-[#3d271a] border border-[#D4AF37]/20",
+    outline: "border border-[#D4AF37]/50 text-[#FDFCF0] hover:bg-[#D4AF37] hover:text-[#0A0806] hover:border-[#D4AF37]"
   };
 
   return (
