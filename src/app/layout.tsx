@@ -14,8 +14,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Al-Reem | Modern Landscaping & Gardening",
-  description: "A minimal Framer template designed for landscaping and gardening businesses.",
+  title: "ALREEM | Premium Mandhi",
+  description: "The Original Kuzhi Mandhi. Crafted by Fire, Perfected by Time.",
 };
 
 export default function RootLayout({
